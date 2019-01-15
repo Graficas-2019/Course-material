@@ -33,7 +33,7 @@ function initViewport(gl, canvas)
     gl.viewport(0, 0, canvas.width, canvas.height);
 }
 
-// ModelView Matrix: defines where the square is positioned in the 3D coordinate system relative to the camera
+// ModelView Matrix: defines where the triangle is positioned in the 3D coordinate system relative to the camera
 // Projection Matrix: required by the shader to convert the 3D space into the 2D space of the viewport. 
 var projectionMatrix, modelViewMatrix;
 
@@ -58,11 +58,11 @@ function initMatrices(canvas)
     mat4.perspective(projectionMatrix, Math.PI / 4, canvas.width / canvas.height, 1, 10000);
 }
 
-// Create the vertex data for a square to be drawn.
+// Create the vertex data for a Triangle to be drawn.
 // WebGL drawing is done with primitives — different types of objects to draw. WebGL primitive types include triangles, points, and lines. 
 // Triangles, the most commonly used primitive, are actually accessible in two different forms: as triangle sets (arrays of triangles) and triangle strips (described shortly). 
 // Primitives use arrays of data, called buffers, which define the positions of the vertices to be drawn.
-function createSquare(gl) 
+function createTriangle(gl) 
 {
     var vertexBuffer;
     vertexBuffer = gl.createBuffer();
@@ -71,7 +71,7 @@ function createSquare(gl)
         0.0,  0.5,  0.0,
         -.5,  -.5,  0.0,
         .5, -.5,  0.0,
-        0, -1, 0
+        // 0, -1, 0
     ];
     // void gl.bufferData(target, ArrayBufferView srcData, usage, srcOffset, length);
     // target = gl.ARRAY_BUFFER: Buffer containing vertex attributes, such as vertex coordinates, texture coordinate data, or vertex color data.
@@ -80,8 +80,8 @@ function createSquare(gl)
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verts), gl.STATIC_DRAW);
 
     // The resulting object contains the vertexbuffer, the size of the vertex structure (3 floats, x, y, z), the number of vertices to be drawn, the the primitive to draw.
-    var square = {buffer:vertexBuffer, vertSize:3, nVerts:4, primtype:gl.TRIANGLE_STRIP};
-    return square;
+    var triangle = {buffer:vertexBuffer, vertSize:3, nVerts:3, primtype:gl.TRIANGLE_STRIP};
+    return triangle;
 }
 
 // Helper function that uses WebGL methods to compile the vertex and fragments shaders from a source.
@@ -126,7 +126,6 @@ var fragmentShaderSource =
     "    // Return the pixel color: always output white\n" +
     "    gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);\n" +
     "}\n";
-
 
 var shaderProgram, shaderVertexPositionAttribute, shaderProjectionMatrixUniform, shaderModelViewMatrixUniform;
 
