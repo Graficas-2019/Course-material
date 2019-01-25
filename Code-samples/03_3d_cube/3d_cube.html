@@ -1,0 +1,32 @@
+<html>
+
+<head>
+<title>3D Cube &mdash; Example 2-2</title>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<script src="../libs/jquery-3.3.1/jquery-3.3.1.js"></script>
+<script src="../libs/gl-matrix/gl-matrix.js"></script>
+<script src="3d_cube.js"></script>
+
+<script type="text/javascript">
+          
+	$(document).ready(
+			function() {
+		        var canvas = document.getElementById("webglcanvas");
+			    var gl = initWebGL(canvas);
+		        initViewport(gl, canvas);
+		        initGL(canvas);
+                var cube = createCube(gl, [0, 0, -1], [1, 1, 1]);
+		        initShader(gl);
+				run(gl, [cube]);
+			}
+	);
+
+</script>
+
+</head>
+<body>
+
+    <canvas id="webglcanvas" style="border: none;" width="800" height="500"></canvas>
+
+</body>
+</html>
