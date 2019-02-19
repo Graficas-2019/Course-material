@@ -1,5 +1,8 @@
 @CHARSET "UTF-8";
 
+body{
+	color:white;
+}
 #title {
 	position:absolute;
 	left:20px;
